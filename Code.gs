@@ -29,8 +29,8 @@
 /**
  * Configuration constants
  */
-const databaseId = // looks like "170fg769795a4721bed237cebf6bfa82"; //the UUID of the page. 
-const secret = // looks like 'secret_.....'; //your INTERNAL INTEGRATION TOKEN
+const databaseId = //LOOKS LIKE "920ag773025b431eed213c5bf6bfa82"; //the ID of the page. 
+const secret = //LOOKS LIKE 'secret_Spfij38SFJPIEUpu3S8f3paihdpaisufddd'; //your INTERNAL INTEGRATION TOKEN
 const recurPropName = "Recur"; // must be a select-type property, must follow the "# days|weeks|months from Due|Date" schema
 const datePropName = "Date"; // must be a date-type property
 const donePropName = "Done"; // must be the checkbox property you use to mark things complete
@@ -97,14 +97,14 @@ function setNextOccurence(){
    * - "1 Day from Done" to have something recur up the day after you complete it
    */
   tasksToReset.forEach(task=>{
+    Logger.log(task)
     let recurUnit = task.recur.split(' ')[1].substr(0,1);
     let recurNum = Number.parseInt(task.recur.split(' ')[0]);
     let recurFrom = task.recur.split(' ')[3];
-    let firstDate = new Date(new Date(task.done) + timezoneOffset); //-18000 for timezone offset
+    let firstDate = new Date(new Date(task.done).getTime() + timezoneOffset); //-18000 for timezone offset
     if(recurFrom.toUpperCase() == "DUE"){ //case doesn't matter
       firstDate = new Date(task.date);
     }
-    // console.log("add " + recurNum + " of " + recurUnit + " to " + firstDate);
     let secondDate = new Date(firstDate.getTime());
     if(recurUnit.toUpperCase() == "D"){
       secondDate.setDate(secondDate.getDate() + recurNum);
@@ -115,6 +115,7 @@ function setNextOccurence(){
     }else{
       throw new Error("Your recur unit wasn't supported. It was " + recurUnit);
     }
+    Logger.log("add " + recurNum + " of " + recurUnit + " to " + firstDate + " to get " + secondDate);
     Logger.log({
       first: firstDate,
       adder: recurNum,
@@ -146,10 +147,10 @@ function resetTaskTo(id, newDue){
       },
       "payload": JSON.stringify({"properties":
         {
-          [donePropId]: {
+          [donePropName]: {
             "checkbox": false
           },
-          [datePropName]:{
+          "Date":{
             "date":{
               "start": newDue.toISOString().substr(0,10)
             }
