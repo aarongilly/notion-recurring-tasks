@@ -29,8 +29,8 @@
 /**
  * Configuration constants
  */
-const databaseId = //LOOKS LIKE "920ag773025b431eed213c5bf6bfa82"; //the ID of the page. 
-const secret = //LOOKS LIKE 'secret_Spfij38SFJPIEUpu3S8f3paihdpaisufddd'; //your INTERNAL INTEGRATION TOKEN
+const databaseId = //LOOKS LIKE "170ef979095a4221bed237CCCf777a44"; //the ID of the page. 
+const secret = //LOOKS LIKE 'secret_FPiusp8fu7eIFJEPI3UPISuFNjJ1jFEtYr6GnBgXPsys'; //your INTERNAL INTEGRATION TOKEN
 const recurPropName = "Recur"; // must be a select-type property, must follow the "# days|weeks|months from Due|Date" schema
 const datePropName = "Date"; // must be a date-type property
 const donePropName = "Done"; // must be the checkbox property you use to mark things complete
